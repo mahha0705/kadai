@@ -21,7 +21,6 @@ while true do
     puts "\n\n#{Constant::LINE1}ログイン#{Constant::LINE1}"
    	puts "名前を入力してください......"
    	input_name = gets.chomp
-
     if User.user_list == []
       user = User.new(input_name)
     else

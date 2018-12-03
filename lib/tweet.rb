@@ -1,6 +1,5 @@
 class Tweet
   attr_reader :text, :tweet_registration_time
-  @@tweet_count = 0
   @@tweetslist = []
 
   def initialize(text,user)
@@ -8,12 +7,11 @@ class Tweet
     @user = user
     @text = text
     @tweet_registration_time = Time.now
-    @@tweet_count += 1
     @@tweetslist << self
   end
 
   def self.tweet_count
-    @@tweet_count
+    @@tweetslist.count
   end
 
   def yourtweet(tweet)
@@ -30,4 +28,5 @@ class Tweet
       end
     end
   end
+
 end
