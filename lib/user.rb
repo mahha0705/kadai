@@ -25,7 +25,7 @@ class User
 
   def show_tweet
     if tweets == []
-      puts "ツイートはありません。"
+      puts "\nツイートはありません。"
     else
       tweets.each do |tweet|
         puts tweet.yourtweet(tweet)
