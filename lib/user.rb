@@ -1,35 +1,35 @@
 class User
-	attr_reader :name, :user_registration_time, :tweets ,:error
-  @@user_list = []
+	attr_reader :name, :registration_time, :tweets ,:error
+  @@users_list = []
 
   def initialize(name)
     return @error = "無効な値です。" if name == ""
     @name = name
-    @user_registration_time = Time.now.to_s
+    @registration_time = Time.now.to_s
     @tweets = []
-    @@user_list << self
+    @@users_list << self
   end
 
-  def self.user_list
-    @@user_list
+  def self.users_list
+    @@users_list
   end
 
   def self.find(input_name)
-    user = @@user_list.find { |user| user.name  == input_name}
+    user = @@users_list.find { |user| user.name  == input_name}
     user = User.new(input_name) if user == nil
     user
   end
 
-  def add_tweet(tweet)
+  def add_mytweet(tweet)
     tweets << tweet
   end
 
-  def show_tweet
+  def show_mytweets
     if tweets == []
       "\nツイートはありません。"
     else
       tweets.each do |tweet|
-        puts tweet.yourtweet
+        puts tweet.tweet_block
       end
     end
   end

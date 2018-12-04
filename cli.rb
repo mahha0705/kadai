@@ -5,21 +5,19 @@ require "./lib/tweet.rb"
 require "./lib/constant.rb"
 include Constant
 
-puts "\n\n#{Constant::LINE1}\nようこそRubyツイッターへ\n#{Constant::LINE1}"
+puts Constant::STARTDISPLAY
 
 while true do
-  puts "\n\n#{Constant::LINE1}タイムライン#{Constant::LINE1}"
-  puts "投稿されたツイート:#{Tweet.tweet_count}件"
-  Tweet.tweetslist
+  puts Constant::TIMELINE
+  puts "投稿されたツイート:#{Tweet.tweets_count}件"
+  puts Tweet.tweets_list
 
-  puts "\n\n#{Constant::LINE1}メニュー#{Constant::LINE1}"
-  puts "\n[a]ログイン"
-  puts "\n[b]終了"
-  puts "\n入力待機中........"
+  puts Constant::MENU
+  puts "\n[a]ログイン\n\n[b]終了\n\n入力待機中......."
   input = gets.chomp
 
   if input == "a"
-    puts "\n\n#{Constant::LINE1}ログイン#{Constant::LINE1}"
+    puts Constant::LOGIN
 
     while true do
       puts "名前を入力してください......"
@@ -34,24 +32,20 @@ while true do
     end
 
     while true do
-      puts "\n\n#{Constant::LINE1}タイムライン#{Constant::LINE1}"
-      Tweet.tweetslist
+      puts Constant::TIMELINE
+      puts Tweet.tweets_list
 
-      puts "\n\n#{Constant::LINE1}ログイン中のユーザー#{Constant::LINE1}"
-      puts "\n#{user.name}さん:#{user.tweets.count}件のツイート"
-      puts "\n登録:#{user.user_registration_time}"
+      puts Constant::LOGINUSER
+      puts "\n#{user.name}さん:#{user.tweets.count}件のツイート\n登録:#{user.registration_time}"
 
-      puts "\n\n#{Constant::LINE1}メニュー#{Constant::LINE1}"
-      puts "\n[c]ツイートする"
-      puts "\n[d]自分のツイート一覧"
-      puts "\n[e]ログアウト"
-      puts "\n入力待機中........"
+      puts Constant::MENU
+      puts "\n[c]ツイートする\n\n[d]自分のツイート一覧\n\n[e]ログアウト\n\n入力待機中......"
 
       input = gets.chomp
 
       if input == "c"
         while true do
-          puts "\n\nツイート入力待ち....."
+          puts "\nツイート入力待ち....."
           text = gets.chomp
           tweet = Tweet.new(text,user)
           if tweet.error
@@ -62,22 +56,24 @@ while true do
         end
 
       elsif input == "d"
-        puts "\n\n#{Constant::LINE1}#{user.name}さんのツイート一覧#{Constant::LINE1}"
-        user.show_tweet
-        puts "エンター入力....."
-        input = gets.chomp
+        puts Constant::YOURTWEETS
+        user.show_mytweets
+        puts "\n戻る？"
+        gets.chomp
+
       elsif input == "e"
         break
+
       else
         puts "入力された値は無効な値です。"
       end
     end
 
   elsif input == "b"
-    puts "バイバイ...."
+    puts "バイバイ......"
     exit
+
   else
     puts "入力された値は無効な値です。"
   end
-
 end

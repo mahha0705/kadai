@@ -30,24 +30,24 @@ describe Tweet do
 
     it "登録した時刻を記録すること" do
       current_time = Time.now.to_s
-      expect(@tweet.tweet_registration_time.to_s).to eq current_time
+      expect(@tweet.registration_time.to_s).to eq current_time
     end
 
-    # it "@@tweetslistにツイートの情報が追加されること" do
-    #   expect(Tweet.tweetslist).to eq [@tweet]
+    # it "@@tweets_listにツイートの情報が追加されること" do
+    #   expect(Tweet.tweets_list).to eq [@tweet]
     # end
 
-    #add_tweetメゾットはuser_specで確認済み
+    #add_mytweetメゾットはuser_specで確認済み
     after do
-      @@tweetslist = []
+      @@tweets_list = []
     end
 
   end
 
-  describe "#self.tweet_count" do
+  describe "#self.tweets_count" do
     context " ユーザー登録数が0の場合 " do
       it "0が表示されること" do
-        expect(Tweet.tweet_count).to eq 0
+        expect(Tweet.tweets_count).to eq 0
       end
     end
 
@@ -57,33 +57,33 @@ describe Tweet do
         Tweet.new("hello",user1)
         user2 = User.new("櫻井")
         Tweet.new("hello",user2)
-        expect(Tweet.tweet_count).to eq 2
+        expect(Tweet.tweets_count).to eq 2
       end
     end
 
     after do
-      @@tweetslist = []
+      @@tweets_list = []
     end
   end
 
-  describe "self.tweetslist" do
+  describe "self.tweets_list" do
     context "ツイートをしていない場合" do
       it "ツイートはありませんと表示されること" do
-        expect(Tweet.tweetslist).to eq "ツイートはありません。"
+        expect(Tweet.tweets_list).to eq "ツイートはありません。"
       end
     end
   end
 
-  describe "#yourtweet" do
+  describe "#tweet_block" do
     before do
       @user = User.new("sakurai")
       @tweet = Tweet.new("hello",@user)
     end
     it "ツイートが表示されること" do
-      expect(@tweet.yourtweet).to eq "\nhello\nby:sakurai\nat:#{Time.now.to_s}"
+      expect(@tweet.tweet_block).to eq "\nhello\nby:sakurai\nat:#{Time.now.to_s}"
     end
     after do
-      @@tweetslist = []
+      @@tweets_list = []
     end
   end
 
