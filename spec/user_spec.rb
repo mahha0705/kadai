@@ -2,7 +2,6 @@ require 'rspec'
 require_relative "../lib/user.rb"
 require_relative "../lib/tweet.rb"
 
-
 describe User do
 
   describe "#initialize" do

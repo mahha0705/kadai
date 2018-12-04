@@ -1,5 +1,5 @@
 class User
-	attr_reader :name, :registration_time, :tweets ,:error
+  attr_reader :name, :registration_time, :tweets ,:error
   @@users_list = []
 
   def initialize(name)
