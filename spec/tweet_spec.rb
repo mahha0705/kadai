@@ -9,7 +9,7 @@ describe Tweet do
       @user = User.new("sakurai")
       @tweet = Tweet.new("hello",@user)
     end
-    context "文字が入力された場合" do
+    context "文章が入力された場合" do
       it "ツイート文がインスタンス変数に登録されること" do
         expect(@tweet.text).to eq "hello"
       end
@@ -35,12 +35,12 @@ describe Tweet do
   end
 
   describe "#self.tweets_count" do
-    context " ユーザー登録数が0の場合 " do
+    context " ツイート総数が0の場合 " do
       it "0が表示されること" do
         expect(Tweet.tweets_count).to eq 0
       end
     end
-    context " ユーザー登録数が2の場合 " do
+    context " ツイート総数が2の場合 " do
       it "2が表示されること" do
         user1 = User.new("sakurai")
         Tweet.new("hello",user1)
@@ -57,7 +57,7 @@ describe Tweet do
   describe "self.tweets_list" do
     before do
       @user1 = User.new("sakurai")
-      @user2 = User.new("sakurai")
+      @user2 = User.new("櫻井")
     end
     context "ツイートをしていない場合" do
       it "ツイートはありませんと表示されること" do
@@ -65,11 +65,11 @@ describe Tweet do
       end
     end
     context "任意のユーザーが2件ツイートをしている場合" do
-      it "自分のツイートが2件表示される" do
+      it "ツイートが2件表示される" do
         tweet1 = Tweet.new("hello",@user1)
         tweet2 = Tweet.new("byebye",@user2)
         current_time = Time.now.to_s
-        expect { Tweet.tweets_list }.to output("\nhello\nby:sakurai at:(#{current_time})\n\nbyebye\nby:sakurai at:(#{current_time})\n").to_stdout
+        expect { Tweet.tweets_list }.to output("\nhello\nby:sakurai at:(#{current_time})\n\nbyebye\nby:櫻井 at:(#{current_time})\n").to_stdout
       end
     end
     after do

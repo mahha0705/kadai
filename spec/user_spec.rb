@@ -6,37 +6,30 @@ require_relative "../lib/tweet.rb"
 describe User do
 
   describe "#initialize" do
-
     before do
       @user = User.new("sakurai")
     end
-
-    context "文字が入力された場合" do
+    context "名前が入力された場合" do
       it "ユーザー名が登録できること" do
         expect(@user.name).to eq "sakurai"
       end
     end
-
     context " ""が入力された場合 " do
       it "エラーが発生すること" do
         user = User.new("")
         expect(user.error).to eq "無効な値です。"
       end
     end
-
-    it "@@users_listにユーザーの情報が追加されること" do
-      expect(User.users_list).to eq [@user]
-    end
-
     it "登録した時刻を記録すること" do
       current_time = Time.now.to_s
       expect(@user.registration_time.to_s).to eq current_time
     end
-
     it "tweets配列が生成されること" do
       expect(@user.tweets).to eq []
     end
-
+    it "@@users_listにユーザーの情報が追加されること" do
+      expect(User.users_list).to eq [@user]
+    end
     #ユーザーリストの初期化
     after do
       @@users_list = []
@@ -48,18 +41,16 @@ describe User do
       @user1 = User.new("櫻井")
       @user2 = User.new("sakurai")
     end
-    context "すでにユーザーが登録されている場合" do
-      it "ユーザーリストが配列で表示できること" do
+    context "すでにユーザーが2件登録されている場合" do
+      it "ユーザーリストが配列で2件表示できること" do
         expect(User.users_list).to eq [@user1,@user2]
       end
     end
-
     context "まだユーザーが登録されていない場合" do
       it "空配列が表示できること" do
         expect(User.users_list).to eq []
       end
     end
-
     #ユーザーリストの初期化
     after do
       @@users_list = []
@@ -70,14 +61,12 @@ describe User do
     before do
       @user = User.new("sakurai")
     end
-
     context "既存のユーザーの場合" do
       it "ユーザー情報を取ってこれること" do
         #同一インスタンスの確認なので、beを使用
         expect(User.find("sakurai")).to be @user
       end
     end
-
     context "新規のユーザーの場合" do
       it "新規でユーザーが登録されること" do
         expect(User.new("櫻井")).to be User.find("櫻井")
@@ -86,22 +75,19 @@ describe User do
     after do
       @@users_list = []
     end
-
   end
 
   describe "add_mytweet(tweet)" do
     before do
       @user = User.new("sakurai")
     end
-
     context "文字が入力された場合" do
       it "ユーザーのツイートが追加される" do
         text = "櫻井です"
         tweet = Tweet.new(text,@user)
-        expect(@user.add_mytweet(tweet)).to eq @user.tweets
+        expect(@user.add_mytweet(tweet)).to eq [tweet,tweet] #Tweet.newと@user.add_mytweet(tweet)で[]に2つtweetが追加される
       end
     end
-
     context " ""が入力された場合 " do
       it "ツイートが追加されず、エラーが発生する" do
         text = ""
@@ -109,7 +95,6 @@ describe User do
         expect(tweet.error).to eq "無効な値です。"
       end
     end
-
     after do
       @@users_list = []
     end
