@@ -29,13 +29,13 @@ while true do
       break
       end
     end
-    #--------------ログインユーザー----------------------
+    #--------------タイムライン----------------------------
     while true do
-      puts Constant::LOGINUSER
-      puts "\n#{user.name}さん:(#{user.tweets.count}件のツイート)\n登録:(#{user.registration_time})"
-    #--------------タイムライン-----------------------------
       puts Constant::TIMELINE
       Tweet.tweets_list
+    #--------------ログインユーザー-------------------------
+      puts Constant::LOGINUSER
+      puts "\n#{user.name}さん:(#{user.tweets.count}件のツイート)\n登録:(#{user.registration_time})"
     #--------------ログイン後のメニュー----------------------
       puts Constant::MENU
       puts "\n[c]ツイートする\n\n[d]自分のツイート一覧\n\n[e]ログアウト\n\n入力待機中......"
@@ -56,7 +56,7 @@ while true do
       elsif input == "d"
         puts Constant::YOURTWEETS
         user.show_mytweets
-        puts "\n戻る？"
+        puts "\n戻る？(Enter)"
         gets.chomp
       #--------------ログアウト---------------------------
       elsif input == "e"
