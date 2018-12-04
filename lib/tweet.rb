@@ -1,12 +1,13 @@
 class Tweet
-  attr_reader :text, :tweet_registration_time
+  attr_reader :text, :tweet_registration_time, :error
   @@tweetslist = []
 
   def initialize(text,user)
+    return @error = "無効な値です。" if text == ""
     user.add_tweet(self)
     @user = user
     @text = text
-    @tweet_registration_time = Time.now
+    @tweet_registration_time = Time.now.to_s
     @@tweetslist << self
   end
 
@@ -15,8 +16,7 @@ class Tweet
   end
 
   def yourtweet(tweet)
-    puts "\n#{tweet.text}"
-    puts "by #{@user.name} at #{tweet.tweet_registration_time}"
+    "\n#{tweet.text}\nby:#{@user.name}\nat:#{tweet.tweet_registration_time}"
   end
 
   def self.tweetslist

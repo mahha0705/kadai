@@ -8,10 +8,11 @@ include Constant
 puts "\n\n#{Constant::LINE1}\nようこそRubyツイッターへ\n#{Constant::LINE1}"
 
 while true do
-
   puts "\n\n#{Constant::LINE1}タイムライン#{Constant::LINE1}"
   puts "投稿されたツイート:#{Tweet.tweet_count}件"
   Tweet.tweetslist
+
+  puts "\n\n#{Constant::LINE1}メニュー#{Constant::LINE1}"
   puts "\n[a]ログイン"
   puts "\n[b]終了"
   puts "\n入力待機中........"
@@ -19,14 +20,18 @@ while true do
 
   if input == "a"
     puts "\n\n#{Constant::LINE1}ログイン#{Constant::LINE1}"
-   	puts "名前を入力してください......"
-   	input_name = gets.chomp
-    if User.user_list == []
-      user = User.new(input_name)
-    else
+
+    while true do
+      puts "名前を入力してください......"
+      input_name = gets.chomp
       user = User.find(input_name)
+      if user.error
+        puts user.error
+      else
+        puts "\n\nログイン完了しました......"
+      break
+      end
     end
-    puts "\n\nログイン完了しました......"
 
     while true do
       puts "\n\n#{Constant::LINE1}タイムライン#{Constant::LINE1}"
@@ -48,13 +53,14 @@ while true do
         while true do
           puts "\n\nツイート入力待ち....."
           text = gets.chomp
-          if text == ""
-            puts "\n無効な値です。"
+          tweet = Tweet.new(text,user)
+          if tweet.error
+            puts tweet.error
           else
-            Tweet.new(text,user)
             break
           end
         end
+
       elsif input == "d"
         puts "\n\n#{Constant::LINE1}#{user.name}さんのツイート一覧#{Constant::LINE1}"
         user.show_tweet
@@ -65,7 +71,6 @@ while true do
       else
         puts "入力された値は無効な値です。"
       end
-
     end
 
   elsif input == "b"
