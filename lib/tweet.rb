@@ -1,32 +1,32 @@
 class Tweet
-  attr_reader :text, :tweet_registration_time, :error ,:user
-  @@tweetslist = []
+  attr_reader :text, :registration_time, :error ,:user
+  @@tweets_list = []
 
   def initialize(text,user)
     return @error = "無効な値です。" if text == ""
-    user.add_tweet(self)
+    user.add_mytweet(self)
     @text = text
     @user = user
-    @tweet_registration_time = Time.now.to_s
-    @@tweetslist << self
+    @registration_time = Time.now.to_s
+    @@tweets_list << self
   end
 
-  def self.tweet_count
-    @@tweetslist.count
+  def self.tweets_count
+    @@tweets_list.count
   end
 
-  def self.tweetslist
-    if @@tweetslist == []
+  def self.tweets_list
+    if @@tweets_list == []
       "ツイートはありません。"
     else
-      @@tweetslist.each do |tweet|
-        puts tweet.yourtweet
+      @@tweets_list.each do |tweet|
+        puts tweet.tweet_block
       end
     end
   end
 
-  def yourtweet
-    "\n#{text}\nby:#{@user.name}\nat:#{tweet_registration_time}"
+  def tweet_block
+    "\n#{text}\nby:#{@user.name}\nat:#{registration_time}"
   end
 
 end

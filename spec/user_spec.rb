@@ -24,13 +24,13 @@ describe User do
       end
     end
 
-    it "@@user_listにユーザーの情報が追加されること" do
-      expect(User.user_list).to eq [@user]
+    it "@@users_listにユーザーの情報が追加されること" do
+      expect(User.users_list).to eq [@user]
     end
 
     it "登録した時刻を記録すること" do
       current_time = Time.now.to_s
-      expect(@user.user_registration_time.to_s).to eq current_time
+      expect(@user.registration_time.to_s).to eq current_time
     end
 
     it "tweets配列が生成されること" do
@@ -39,30 +39,30 @@ describe User do
 
     #ユーザーリストの初期化
     after do
-      @@user_list = []
+      @@users_list = []
     end
   end
 
-  describe "self.user_list" do
+  describe "self.users_list" do
     before(:all) do #既に登録済みの場合の適用のため:all指定
       @user1 = User.new("櫻井")
       @user2 = User.new("sakurai")
     end
     context "すでにユーザーが登録されている場合" do
       it "ユーザーリストが配列で表示できること" do
-        expect(User.user_list).to eq [@user1,@user2]
+        expect(User.users_list).to eq [@user1,@user2]
       end
     end
 
     context "まだユーザーが登録されていない場合" do
       it "空配列が表示できること" do
-        expect(User.user_list).to eq []
+        expect(User.users_list).to eq []
       end
     end
 
     #ユーザーリストの初期化
     after do
-      @@user_list = []
+      @@users_list = []
     end
   end
 
@@ -84,12 +84,12 @@ describe User do
       end
     end
     after do
-      @@user_list = []
+      @@users_list = []
     end
 
   end
 
-  describe "add_tweet(tweet)" do
+  describe "add_mytweet(tweet)" do
     before do
       @user = User.new("sakurai")
     end
@@ -98,7 +98,7 @@ describe User do
       it "ユーザーのツイートが追加される" do
         text = "櫻井です"
         tweet = Tweet.new(text,@user)
-        expect(@user.add_tweet(tweet)).to eq @user.tweets
+        expect(@user.add_mytweet(tweet)).to eq @user.tweets
       end
     end
 
@@ -111,18 +111,18 @@ describe User do
     end
 
     after do
-      @@user_list = []
+      @@users_list = []
     end
   end
 
-  describe "show_tweet" do
+  describe "show_mytweets" do
     before do
       @user = User.new("sakurai")
     end
 
     context "ツイートをしていない場合" do
       it "ツイートはありませんと表示されること" do
-        expect(@user.show_tweet).to eq "\nツイートはありません。"
+        expect(@user.show_mytweets).to eq "\nツイートはありません。"
       end
     end
 
@@ -130,11 +130,11 @@ describe User do
     #   it "自分のツイートが表示される" do
     #     tweet1 = Tweet.new("hello",@user)
     #     tweet2 = Tweet.new("byebye",@user)
-    #     expect(@user.show_tweet).to eq  tweet1.yourtweet(tweet1)
+    #     expect(@user.show_mytweets).to eq  tweet1.tweet_block(tweet1)
     #   end
     # end
     # after do
-    #   @@user_list = []
+    #   @@users_list = []
     # end
   end
 end
