@@ -17,7 +17,7 @@ class Tweet
 
   def self.tweets_list
     if @@tweets_list == []
-      "ツイートはありません。"
+      puts "\nツイートはありません。\n"
     else
       @@tweets_list.each do |tweet|
         puts tweet.tweet_block
@@ -26,7 +26,7 @@ class Tweet
   end
 
   def tweet_block
-    "\n#{text}\nby:#{@user.name}\nat:#{registration_time}"
+    "\n#{text}\nby:#{@user.name} at:(#{registration_time})\n"
   end
 
 end

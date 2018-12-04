@@ -119,23 +119,24 @@ describe User do
     before do
       @user = User.new("sakurai")
     end
-
     context "ツイートをしていない場合" do
       it "ツイートはありませんと表示されること" do
-        expect(@user.show_mytweets).to eq "\nツイートはありません。"
+        expect { @user.show_mytweets }.to output("\nツイートはありません。\n").to_stdout
+        #標準出力の記法
       end
     end
-
-    # context "ツイートをしている場合" do
-    #   it "自分のツイートが表示される" do
-    #     tweet1 = Tweet.new("hello",@user)
-    #     tweet2 = Tweet.new("byebye",@user)
-    #     expect(@user.show_mytweets).to eq  tweet1.tweet_block(tweet1)
-    #   end
-    # end
-    # after do
-    #   @@users_list = []
-    # end
+    context "同じユーザーが2件ツイートをしている場合" do
+      it "自分のツイートが2件表示される" do
+        tweet1 = Tweet.new("hello",@user)
+        tweet2 = Tweet.new("byebye",@user)
+        current_time = Time.now.to_s
+        expect { @user.show_mytweets }.to output("\nhello\nby:sakurai at:(#{current_time})\n\nbyebye\nby:sakurai at:(#{current_time})\n").to_stdout
+      end
+    end
+    after do
+      @@users_list = []
+    end
   end
+
 end
 

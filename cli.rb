@@ -10,7 +10,7 @@ puts Constant::STARTDISPLAY
 while true do
   puts Constant::TIMELINE
   puts "投稿されたツイート:#{Tweet.tweets_count}件"
-  puts Tweet.tweets_list
+  Tweet.tweets_list
 
   puts Constant::MENU
   puts "\n[a]ログイン\n\n[b]終了\n\n入力待機中......."
@@ -32,11 +32,11 @@ while true do
     end
 
     while true do
-      puts Constant::TIMELINE
-      puts Tweet.tweets_list
-
       puts Constant::LOGINUSER
-      puts "\n#{user.name}さん:#{user.tweets.count}件のツイート\n登録:#{user.registration_time}"
+      puts "\n#{user.name}さん:(#{user.tweets.count}件のツイート)\n登録:(#{user.registration_time})"
+
+      puts Constant::TIMELINE
+      Tweet.tweets_list
 
       puts Constant::MENU
       puts "\n[c]ツイートする\n\n[d]自分のツイート一覧\n\n[e]ログアウト\n\n入力待機中......"
