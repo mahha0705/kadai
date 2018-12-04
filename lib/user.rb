@@ -1,5 +1,4 @@
 class User
-
 	attr_reader :name, :user_registration_time, :tweets ,:error
   @@user_list = []
 
@@ -30,7 +29,7 @@ class User
       "\nツイートはありません。"
     else
       tweets.each do |tweet|
-        puts tweet.yourtweet(tweet)
+        puts tweet.yourtweet
       end
     end
   end
